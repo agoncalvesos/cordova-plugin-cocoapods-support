@@ -208,14 +208,14 @@ module.exports = function (context) {
 
             var buildConfigContext = fs.readFileSync('platforms/ios/cordova/build.xcconfig', 'utf8');
             var bridgedHeaderRegex;
-            if (useFrameworks) {
+            /*if (useFrameworks) {
                 bridgedHeaderRegex = /SWIFT_OBJC_BRIDGING_HEADER/g;
                 fs.writeFileSync('platforms/ios/cordova/build.xcconfig', buildConfigContext.replace(bridgedHeaderRegex, '//SWIFT_OBJC_BRIDGING_HEADER'));
-            } else {
+            } else {*/
                 bridgedHeaderRegex = /\/\/SWIFT_OBJC_BRIDGING_HEADER/g;
                 fs.writeFileSync('platforms/ios/cordova/build.xcconfig', buildConfigContext.replace(bridgedHeaderRegex, 'SWIFT_OBJC_BRIDGING_HEADER'));
 
-            }
+            //}
 
             fs.writeFileSync(podConfigPath, JSON.stringify(newPods, null, '\t'));
         } else {
