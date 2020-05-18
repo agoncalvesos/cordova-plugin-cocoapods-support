@@ -155,7 +155,7 @@ module.exports = function (context) {
 
             for (podName in newPods.pods) {
 
-                let suffix;
+                let suffix = '';
                 pod = newPods.pods[podName];
 
                 if (pod['fix-bundle-path']) {
@@ -171,10 +171,6 @@ module.exports = function (context) {
                         suffix += ", :branch => '" + pod.branch + "'";
                     } else if (pod.commit) {
                         suffix += ", :commit => '" + pod.commit + "'";
-                    } else if (pod.configuration) {
-                        suffix = ", :configuration => '" + pod.configuration + "'";
-                    } else if(pod.modular_headers){
-                        suffix = ", :modular_headers => " + pod.modular_headers;
                     }
                 } else if (pod.path) {
                     suffix = ", :path => '" + pod.path + "'";
@@ -192,8 +188,14 @@ module.exports = function (context) {
                     suffix = pod.spec.startsWith(':') ? `, ${pod.spec}` : `, '${pod.spec}'`;
                 } else if(pod.modular_headers){
                     suffix = ", :modular_headers => " + pod.modular_headers;
-                } else {
-                    suffix = '';
+                }
+
+                if (pod.configuration) {
+                    suffix = ", :configuration => '" + pod.configuration + "'";
+                }
+                
+                if(pod.modular_headers){
+                    suffix = ", :modular_headers => " + pod.modular_headers;
                 }
 
                 podfileContents.push(`\tpod '${podName}'${suffix}`);
