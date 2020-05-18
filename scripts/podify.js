@@ -187,7 +187,7 @@ module.exports = function (context) {
                 } else if (pod.spec) {
                     suffix = pod.spec.startsWith(':') ? `, ${pod.spec}` : `, '${pod.spec}'`;
                 } else if(pod.modular_headers){
-                    suffix = ", :modular_headers => '" + pod.modular_headers + "'";
+                    suffix = ", :modular_headers => " + pod.modular_headers;
                 } else {
                     suffix = '';
                 }
