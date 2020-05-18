@@ -171,6 +171,10 @@ module.exports = function (context) {
                         suffix += ", :branch => '" + pod.branch + "'";
                     } else if (pod.commit) {
                         suffix += ", :commit => '" + pod.commit + "'";
+                    } else if (pod.configuration) {
+                        suffix = ", :configuration => '" + pod.configuration + "'";
+                    } else if(pod.modular_headers){
+                        suffix = ", :modular_headers => " + pod.modular_headers;
                     }
                 } else if (pod.path) {
                     suffix = ", :path => '" + pod.path + "'";
