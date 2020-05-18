@@ -172,7 +172,6 @@ module.exports = function (context) {
                     } else if (pod.commit) {
                         suffix += ", :commit => '" + pod.commit + "'";
                     }
-
                 } else if (pod.path) {
                     suffix = ", :path => '" + pod.path + "'";
                 } else if (pod.subspecs) {
@@ -187,6 +186,8 @@ module.exports = function (context) {
                     suffix = ", :podspec => '" + pod.podspec + "'";
                 } else if (pod.spec) {
                     suffix = pod.spec.startsWith(':') ? `, ${pod.spec}` : `, '${pod.spec}'`;
+                } else if(pod.modular_headers){
+                    suffix = ", :modular_headers => '" + pod.modular_headers + "'";
                 } else {
                     suffix = '';
                 }
