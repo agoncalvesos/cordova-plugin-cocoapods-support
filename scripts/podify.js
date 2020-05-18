@@ -162,9 +162,9 @@ module.exports = function (context) {
                     bundlePathsToFix.push(pod['fix-bundle-path']);
                 }
                 if (pod.version) {
-                    suffix = `, '${pod.version}'`;
+                    suffix += `, '${pod.version}'`;
                 } else if (pod.git) {
-                    suffix = ", :git => '" + pod.git + "'";
+                    suffix += ", :git => '" + pod.git + "'";
                     if (pod.tag) {
                         suffix += ", :tag => '" + pod.tag + "'";
                     } else if (pod.branch) {
@@ -173,29 +173,29 @@ module.exports = function (context) {
                         suffix += ", :commit => '" + pod.commit + "'";
                     }
                 } else if (pod.path) {
-                    suffix = ", :path => '" + pod.path + "'";
+                    suffix += ", :path => '" + pod.path + "'";
                 } else if (pod.subspecs) {
                     var specs = pod.subspecs.split(',').map(spec => `'${spec.trim()}'`);
-                    suffix = ", :subspecs => [" + specs.join() + "]";
+                    suffix += ", :subspecs => [" + specs.join() + "]";
                 } else if (pod.configuration) {
-                    suffix = ", :configuration => '" + pod.configuration + "'";
+                    suffix += ", :configuration => '" + pod.configuration + "'";
                 } else if (pod.configurations) {
                     var configs = pod.configurations.split(',').map(config => `'${config.trim()}`);
-                    suffix = ", :subspecs => [" + configs.join() + "]";
+                    suffix += ", :subspecs => [" + configs.join() + "]";
                 } else if (pod.podspec) {
-                    suffix = ", :podspec => '" + pod.podspec + "'";
+                    suffix += ", :podspec => '" + pod.podspec + "'";
                 } else if (pod.spec) {
-                    suffix = pod.spec.startsWith(':') ? `, ${pod.spec}` : `, '${pod.spec}'`;
+                    suffix += pod.spec.startsWith(':') ? `, ${pod.spec}` : `, '${pod.spec}'`;
                 } else if(pod.modular_headers){
-                    suffix = ", :modular_headers => " + pod.modular_headers;
+                    suffix += ", :modular_headers => " + pod.modular_headers;
                 }
 
                 if (pod.configuration) {
-                    suffix = ", :configuration => '" + pod.configuration + "'";
+                    suffix += ", :configuration => '" + pod.configuration + "'";
                 }
-                
+
                 if(pod.modular_headers){
-                    suffix = ", :modular_headers => " + pod.modular_headers;
+                    suffix += ", :modular_headers => " + pod.modular_headers;
                 }
 
                 podfileContents.push(`\tpod '${podName}'${suffix}`);
